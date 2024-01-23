@@ -1,5 +1,9 @@
 from fastapi import FastAPI
 from docs import tags_metadata
+from fooddata import FoodData
+
+# Objeto para trabajar con los datos de prueba
+food = FoodData()
 
 # Objeto app de tipo FastApi
 app = FastAPI(
@@ -17,14 +21,19 @@ app = FastAPI(
     openapi_tags=tags_metadata
 )
 
-#Configuracion del ApiRestFul
+#Definición de los ENDPOINTS
 
-#Endpoint GET /
+#DEFAULT
 @app.get("/")
 def read_root():
     return {"Hola": "Pakito"}
 
-#Endpoint GET /ingredientes
+#INGREDIENTES
 @app.get("/ingredientes",tags=["ingredientes"])
-def read_ingredients():
-    return {"Objeto": "Ingredientes"}
+async def read_ingredients():
+    #await pedir datos
+    return await food.get_ingredientes()
+
+@app.get("/ingredientes/{ingrediente_id}",tags=["ingredientes"])
+async def read_ingredient(ingrediente_id: int):
+    return await food.get_ingrediente(ingrediente_id)
