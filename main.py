@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+#importamos desde fastAPI, la clases FastAPI y Response
+from fastapi import FastAPI, Response, status
 from docs import tags_metadata
 from fooddata import FoodData
 
@@ -34,6 +35,14 @@ async def read_ingredients():
     #await pedir datos
     return await food.get_ingredientes()
 
-@app.get("/ingredientes/{ingrediente_id}",tags=["ingredientes"])
-async def read_ingredient(ingrediente_id: int):
-    return await food.get_ingrediente(ingrediente_id)
+@app.get("/ingredientes/{ingrediente_id}",tags=["ingredientes"], status_code=status.HTTP_200_OK)
+async def read_ingredient(ingrediente_id: int,response: Response):
+    # Buscamos el ingrediente
+    ingrediente=await food.get_ingrediente(ingrediente_id)
+    #Si encontramos el ingrediente lo devolvemos
+    if(ingrediente):
+        return ingrediente
+    #Si el ingrediente es nulo
+    else:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"error",str(ingrediente_id)+" no encontrado"}

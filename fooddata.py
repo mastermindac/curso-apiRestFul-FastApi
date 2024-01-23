@@ -16,7 +16,11 @@ class FoodData:
 
     # Devolucion asincrona de un alimento
     async def get_ingrediente(self,ingrediente_id: int):
-        alimento={"error",str(ingrediente_id)+" no encontrado"}
+        # Código antiguo
+        # alimento={"error",str(ingrediente_id)+" no encontrado"}
+        # alimento se inicializa a nulo
+        # si no se encuentra el alimento se devolverá el nulo en vez de un objeto JSON
+        alimento=None
         #Recorremos todos los datos JSON
         for item in self.alimentos['alimentos']:
             #Comparamos el id que es int
