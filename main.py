@@ -1,4 +1,5 @@
 #importamos desde fastAPI, la clases FastAPI y Response
+from typing import Union
 from fastapi import FastAPI, Response, status
 from docs import tags_metadata
 from fooddata import FoodData
@@ -31,10 +32,12 @@ def read_root():
 
 #INGREDIENTES
 @app.get("/ingredientes",tags=["ingredientes"])
-async def read_ingredients():
+async def read_ingredients(skip:int=0,total:int=10,todos: Union[bool, None] = None):
     #await pedir datos
-    return await food.get_ingredientes()
-
+    if(todos):
+        return await food.get_allIngredientes()
+    else:
+        return await food.get_ingredientes(skip, total)
 @app.get("/ingredientes/{ingrediente_id}",tags=["ingredientes"], status_code=status.HTTP_200_OK)
 async def read_ingredient(ingrediente_id: int,response: Response):
     # Buscamos el ingrediente

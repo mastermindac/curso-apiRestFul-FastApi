@@ -2,16 +2,19 @@ import json
 # Clase que nos permite trabajar con los datos de prueba
 class FoodData:
 
-    #Propiedad que almacenará todos los alimentos
+    #Propiedades que almacenarán todos los datos
     alimentos=[]
+    platos=[]
 
     def __init__(self):
-        #Carga del fichero de datos de prueba
+        #Carga de los ficheros de datos de prueba
         file=open('data/alimentos.json')
         self.alimentos = json.load(file)
 
     #Devolucion asincrona de datos de alimentos
-    async def get_ingredientes(self):
+    async def get_ingredientes(self,skip,total):
+        return {'alimentos':self.alimentos['alimentos'][skip:(total+skip)]}
+    async def get_allIngredientes(self):
         return self.alimentos
 
     # Devolucion asincrona de un alimento
