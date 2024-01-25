@@ -32,7 +32,7 @@ def read_root():
 
 #INGREDIENTES
 @app.get("/ingredientes",tags=["ingredientes"])
-async def read_ingredients(skip:int=0,total:int=10,todos: Union[bool, None] = None):
+async def read_ingredients(total:int,skip:int=0,todos: Union[bool, None] = None):
     #await pedir datos
     if(todos):
         return await food.get_allIngredientes()
@@ -49,3 +49,36 @@ async def read_ingredient(ingrediente_id: int,response: Response):
     else:
         response.status_code = status.HTTP_404_NOT_FOUND
         return {"error",str(ingrediente_id)+" no encontrado"}
+
+#PLATOS
+@app.get("/platos",tags=["platos"])
+async def read_platos(total:int,skip:int=0,todos: Union[bool, None] = None):
+    #await pedir datos
+    if(todos):
+        return await food.get_allPlatos()
+    else:
+        return await food.get_platos(skip, total)
+@app.get("/platos/{plato_id}",tags=["platos"], status_code=status.HTTP_200_OK)
+async def read_plato(plato_id: int,response: Response):
+    # Buscamos el plato
+    plato=await food.get_plato(plato_id)
+    #Si encontramos el ingrediente lo devolvemos
+    if(plato):
+        return plato
+    #Si el ingrediente es nulo
+    else:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"error",str(plato_id)+" no encontrado"}
+
+@app.get("/platos/{plato_id}/ingredientes/{ingrediente_id}",tags=["platos"], status_code=status.HTTP_200_OK)
+async def read_platoIngrediente(plato_id: int,ingrediente_id: int,response: Response):
+    # Buscamos el plato
+    ingrediente=await food.get_ingredientePlato(plato_id,ingrediente_id)
+    #Si encontramos el ingrediente lo devolvemos
+    if(ingrediente):
+        return ingrediente
+    #Si el ingrediente es nulo
+    else:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"error","plato "+str(plato_id)+","+"ingrediente "+str(ingrediente_id)+" no encontrado"}
+

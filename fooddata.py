@@ -8,9 +8,12 @@ class FoodData:
 
     def __init__(self):
         #Carga de los ficheros de datos de prueba
-        file=open('data/alimentos.json')
-        self.alimentos = json.load(file)
+        fileAlimentos=open('data/alimentos.json')
+        self.alimentos = json.load(fileAlimentos)
+        filePlatos=open('data/platos.json')
+        self.platos = json.load(filePlatos)
 
+#INGREDIENTES
     #Devolucion asincrona de datos de alimentos
     async def get_ingredientes(self,skip,total):
         return {'alimentos':self.alimentos['alimentos'][skip:(total+skip)]}
@@ -31,3 +34,32 @@ class FoodData:
                 alimento=item
                 break
         return alimento
+
+#PLATOS
+    #Devolucion asincrona de datos de alimentos
+    async def get_platos(self,skip,total):
+        return {'platos':self.platos['platos'][skip:(total+skip)]}
+    async def get_allPlatos(self):
+        return self.platos
+
+    # Devolucion asincrona de un alimento
+    async def get_plato(self,plato_id: int):
+        plato=None
+        #Recorremos todos los datos JSON
+        for item in self.platos['platos']:
+            #Comparamos el id que es int
+            if item['id']==plato_id:
+                plato=item
+                break
+        return plato
+
+    async def get_ingredientePlato(self,plato_id: int,ingrediente_id: int):
+        plato=await self.get_plato(plato_id)
+        ingrediente=None
+        if(plato):
+            for item in plato['ingredientes']:
+                # Comparamos el id que es int
+                if item['id'] == ingrediente_id:
+                    ingrediente = await self.get_ingrediente(ingrediente_id)
+                    break
+        return ingrediente
