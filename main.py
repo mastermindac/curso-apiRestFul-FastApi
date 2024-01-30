@@ -50,6 +50,10 @@ async def read_ingredient(ingrediente_id: int,response: Response):
         response.status_code = status.HTTP_404_NOT_FOUND
         return {"error",str(ingrediente_id)+" no encontrado"}
 
+@app.post("/ingredientes",tags=["ingredientes"])
+async def write_ingredients():
+    return {"ingrediente":"POST"}
+
 #PLATOS
 @app.get("/platos",tags=["platos"])
 async def read_platos(total:int,skip:int=0,todos: Union[bool, None] = None):
