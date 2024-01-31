@@ -82,10 +82,25 @@ class FoodData:
 
     # Borramos un ingrediente
     async def delete_ingrediente(self, ingrediente_id: int):
-        self.fileAlimentos=open('data/alimentos.json')
-        self.alimentos = json.load(self.fileAlimentos)
-        print(type(self.alimentos))
-        return None
+        self.fileAlimentos=open('data/alimentos.json','w')
+        #Buscamos el ingrediente
+        ingredienteEncontrado=None
+        ingredientePos=0
+        #Recorremos todos los datos JSON
+        for item in self.alimentos['alimentos']:
+            #Comparamos el id que es int
+            if item['id']==ingrediente_id:
+                ingredienteEncontrado=item
+                break
+            ingredientePos=ingredientePos+1
+        #Si se ha encontrado
+        if(ingredienteEncontrado):
+            self.alimentos['alimentos'].pop(ingredientePos)
+            json.dump(self.alimentos,self.fileAlimentos,indent=2)
+            self.fileAlimentos.close()
+            return {"info":"borrado ingrediente "+str(ingrediente_id)}
+        else:
+            return None
 
 
 #PLATOS
