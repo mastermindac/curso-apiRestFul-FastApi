@@ -6809,15 +6809,6 @@
       "proteinas": 0.5,
       "grasas": 0.1,
       "fibra": 0.1
-    },
-    {
-      "id": 762,
-      "nombre": "Prueba de ingrediente",
-      "calorias": 10,
-      "carbohidratos": 3.5,
-      "proteinas": 0.75,
-      "grasas": 0.4,
-      "fibra": 0.1
     }
   ]
 }

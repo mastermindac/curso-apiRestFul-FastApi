@@ -59,6 +59,10 @@ async def write_ingredients(ingrediente:Ingrediente):
 async def update_ingredients(ingrediente_id:int,ingrediente:Ingrediente):
     return await food.update_ingrediente(ingrediente_id,ingrediente)
 
+@app.delete("/ingredientes/{ingrediente_id}",tags=["ingredientes"])
+async def delete_ingredients(ingrediente_id:int):
+    return await food.delete_ingrediente(ingrediente_id)
+
 #PLATOS
 @app.get("/platos",tags=["platos"])
 async def read_platos(total:int,skip:int=0,todos: Union[bool, None] = None):
