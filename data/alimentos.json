@@ -6811,49 +6811,13 @@
       "fibra": 0.1
     },
     {
-      "nombre": "Prueba",
-      "calorias": 10,
-      "carbohidratos": 34.5,
-      "proteinas": null,
-      "grasas": null,
-      "fibra": null,
-      "id": 758
-    },
-    {
-      "nombre": "Prueba",
-      "calorias": 10,
-      "carbohidratos": 34.5,
-      "proteinas": null,
-      "grasas": null,
-      "fibra": null,
-      "id": 759
-    },
-    {
-      "nombre": "Prueba",
-      "calorias": 10,
-      "carbohidratos": 34.5,
-      "proteinas": null,
-      "grasas": null,
-      "fibra": null,
-      "id": 760
-    },
-    {
-      "nombre": "Prueba",
-      "calorias": 10,
-      "carbohidratos": 34.5,
-      "proteinas": null,
-      "grasas": null,
-      "fibra": null,
-      "id": 761
-    },
-    {
-      "nombre": "Ingrediente prueba",
+      "id": 762,
+      "nombre": "Prueba de ingrediente",
       "calorias": 10,
       "carbohidratos": 3.5,
-      "proteinas": null,
+      "proteinas": 0.75,
       "grasas": 0.4,
-      "fibra": null,
-      "id": 762
+      "fibra": 0.1
     }
   ]
 }

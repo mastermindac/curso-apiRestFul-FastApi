@@ -51,6 +51,43 @@ class FoodData:
         self.fileAlimentos.close()
         return ingredienteDict
 
+    
+
+    # Recibimos y actualizamos un nuevo ingrediente
+    async def update_ingrediente(self, ingrediente_id: int, ingrediente: Ingrediente):
+        self.fileAlimentos=open('data/alimentos.json','w')
+        #Buscamos el ingrediente
+        ingredienteEncontrado=None
+        ingredientePos=0
+        #Recorremos todos los datos JSON
+        for item in self.alimentos['alimentos']:
+            #Comparamos el id que es int
+            if item['id']==ingrediente_id:
+                ingredienteEncontrado=item
+                break
+            ingredientePos=ingredientePos+1
+        #Si se ha encontrado
+        if(ingredienteEncontrado):
+            #Realizamos la actualization
+            ingredienteDict = ingrediente.model_dump()
+            for elem in ingredienteDict:
+                if(ingredienteDict[elem]):
+                #cambiamos el valor
+                    self.alimentos['alimentos'][ingredientePos][elem]=ingredienteDict[elem]
+            json.dump(self.alimentos,self.fileAlimentos,indent=2)
+            self.fileAlimentos.close()
+            return self.alimentos['alimentos'][ingredientePos]
+        else:
+            return None
+
+    # Borramos un ingrediente
+    async def delete_ingrediente(self, ingrediente_id: int):
+        self.fileAlimentos=open('data/alimentos.json')
+        self.alimentos = json.load(self.fileAlimentos)
+        print(type(self.alimentos))
+        return None
+
+
 #PLATOS
     #Devolucion asincrona de datos de alimentos
     async def get_platos(self,skip,total):
