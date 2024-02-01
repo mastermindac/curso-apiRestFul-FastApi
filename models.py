@@ -10,3 +10,14 @@ class Ingrediente(BaseModel):
     proteinas: Union[float, None] = None
     grasas: Union[float, None] = None
     fibra: Union[float, None] = None
+
+# Modelo para la inserción de nuevo plato
+class IngredientePlato(BaseModel):
+    id: int
+    cant: int
+    ud: str
+class Plato(BaseModel):
+    nombre: str
+    tipo: str
+    ingredientes: list[IngredientePlato]
+

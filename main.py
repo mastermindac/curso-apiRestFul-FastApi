@@ -3,7 +3,7 @@ from typing import Union
 from fastapi import FastAPI, Response, status
 from docs import tags_metadata
 from fooddata import FoodData
-from models import Ingrediente
+from models import Ingrediente, Plato
 
 # Objeto para trabajar con los datos de prueba
 food = FoodData()
@@ -94,4 +94,9 @@ async def read_platoIngrediente(plato_id: int,ingrediente_id: int,response: Resp
     else:
         response.status_code = status.HTTP_404_NOT_FOUND
         return {"error","plato "+str(plato_id)+","+"ingrediente "+str(ingrediente_id)+" no encontrado"}
+
+@app.post("/platos",tags=["platos"])
+async def write_platos(plato:Plato):
+    return await food.write_plato(plato)
+
 

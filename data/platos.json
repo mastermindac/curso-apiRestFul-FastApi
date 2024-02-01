@@ -1,28 +1,149 @@
 {
-    "platos":[
+  "platos": [
+    {
+      "id": 1,
+      "nombre": "Macarrones con tomate",
+      "tipo": "Principal",
+      "ingredientes": [
         {
-            "id":1,
-            "nombre":"Macarrones con tomate",
-            "tipo":"Principal",
-            "ingredientes":[{"id":455,"cant":250,"ud":"gr"},{"id":714,"cant":500,"ud":"gr"},{"id":196,"cant":75,"ud":"gr"},{"id":605,"cant":25,"ud":"gr"},{"id":10,"cant":7,"ud":"ml"},{"id":633,"cant":1,"ud":"gr"}]
+          "id": 455,
+          "cant": 250,
+          "ud": "gr"
         },
         {
-            "id":2,
-            "nombre":"Arroz caldoso con pollo",
-            "tipo":"Principal",
-            "ingredientes":[{"id":60,"cant":250,"ud":"gr"},{"id":158,"cant":500,"ud":"ml"},{"id":565,"cant":250,"ud":"gr"},{"id":10,"cant":7,"ud":"ml"},{"id":633,"cant":1,"ud":"gr"}]
+          "id": 714,
+          "cant": 500,
+          "ud": "gr"
         },
         {
-            "id":3,
-            "nombre":"Crema calabacin",
-            "tipo":"Entrante",
-            "ingredientes":[{"id":153,"cant":125,"ud":"gr"},{"id":534,"cant":250,"ud":"gr"},{"id":753,"cant":75,"ud":"gr"},{"id":590,"cant":25,"ud":"gr"},{"id":10,"cant":7,"ud":"ml"},{"id":633,"cant":1,"ud":"gr"}]
+          "id": 196,
+          "cant": 75,
+          "ud": "gr"
         },
         {
-            "id":4,
-            "nombre":"Flan de huevo",
-            "tipo":"Postre",
-            "ingredientes":[{"id":387,"cant":160,"ud":"gr"},{"id":424,"cant":500,"ud":"ml"},{"id":450,"cant":125,"ud":"gr"}]
-        }       
-    ]
+          "id": 605,
+          "cant": 25,
+          "ud": "gr"
+        },
+        {
+          "id": 10,
+          "cant": 7,
+          "ud": "ml"
+        },
+        {
+          "id": 633,
+          "cant": 1,
+          "ud": "gr"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Arroz caldoso con pollo",
+      "tipo": "Principal",
+      "ingredientes": [
+        {
+          "id": 60,
+          "cant": 250,
+          "ud": "gr"
+        },
+        {
+          "id": 158,
+          "cant": 500,
+          "ud": "ml"
+        },
+        {
+          "id": 565,
+          "cant": 250,
+          "ud": "gr"
+        },
+        {
+          "id": 10,
+          "cant": 7,
+          "ud": "ml"
+        },
+        {
+          "id": 633,
+          "cant": 1,
+          "ud": "gr"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Crema calabacin",
+      "tipo": "Entrante",
+      "ingredientes": [
+        {
+          "id": 153,
+          "cant": 125,
+          "ud": "gr"
+        },
+        {
+          "id": 534,
+          "cant": 250,
+          "ud": "gr"
+        },
+        {
+          "id": 753,
+          "cant": 75,
+          "ud": "gr"
+        },
+        {
+          "id": 590,
+          "cant": 25,
+          "ud": "gr"
+        },
+        {
+          "id": 10,
+          "cant": 7,
+          "ud": "ml"
+        },
+        {
+          "id": 633,
+          "cant": 1,
+          "ud": "gr"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "nombre": "Flan de huevo",
+      "tipo": "Postre",
+      "ingredientes": [
+        {
+          "id": 387,
+          "cant": 160,
+          "ud": "gr"
+        },
+        {
+          "id": 424,
+          "cant": 500,
+          "ud": "ml"
+        },
+        {
+          "id": 450,
+          "cant": 125,
+          "ud": "gr"
+        }
+      ]
+    },
+    {
+      "nombre": "Prueba plato",
+      "tipo": "Principal",
+      "ingredientes": [
+        {
+          "id": 455,
+          "cant": 250,
+          "ud": "gr"
+        },
+        {
+          "id": 456,
+          "cant": 12,
+          "ud": "ml"
+        }
+      ],
+      "id": 5
+    }
+  ]
 }

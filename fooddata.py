@@ -1,5 +1,5 @@
 import json
-from models import Ingrediente
+from models import Ingrediente, Plato
 # Clase que nos permite trabajar con los datos de prueba
 class FoodData:
 
@@ -7,14 +7,16 @@ class FoodData:
     alimentos=[]
     platos=[]
     fileAlimentos = None
+    filePlatos = None
 
     def __init__(self):
         #Carga de los ficheros de datos de prueba
         self.fileAlimentos=open('data/alimentos.json')
         self.alimentos = json.load(self.fileAlimentos)
         self.fileAlimentos.close()
-        filePlatos=open('data/platos.json')
-        self.platos = json.load(filePlatos)
+        self.filePlatos=open('data/platos.json')
+        self.platos = json.load(self.filePlatos)
+        self.filePlatos.close()
 
 #INGREDIENTES
     #Devolucion asincrona de datos de alimentos
@@ -131,3 +133,16 @@ class FoodData:
                     ingrediente = await self.get_ingrediente(ingrediente_id)
                     break
         return ingrediente
+
+    # Recibimos y guardamos un nuevo plato
+    async def write_plato(self, plato: Plato):
+        self.filePlatos=open('data/platos.json','w')
+        #Conseguimos el último id de la lista
+        ultimo_plato=self.platos['platos'][-1]['id']
+        #Añadimos un nuevo id al ingrediente nuevo
+        platoDict=plato.model_dump()
+        platoDict['id']=ultimo_plato+1
+        self.platos['platos'].append(platoDict)
+        json.dump(self.platos,self.filePlatos,indent=2)
+        self.filePlatos.close()
+        return platoDict
