@@ -6809,6 +6809,24 @@
       "proteinas": 0.5,
       "grasas": 0.1,
       "fibra": 0.1
+    },
+    {
+      "nombre": "Ingrediente para plato nuevo",
+      "calorias": null,
+      "carbohidratos": null,
+      "proteinas": null,
+      "grasas": null,
+      "fibra": null,
+      "id": 758
+    },
+    {
+      "nombre": "Ingrediente para plato nuevo",
+      "calorias": null,
+      "carbohidratos": null,
+      "proteinas": null,
+      "grasas": null,
+      "fibra": null,
+      "id": 759
     }
   ]
 }
