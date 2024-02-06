@@ -130,9 +130,18 @@ class FoodData:
         return dict([('ingrediente',ingrediente),('plato',platoDict)])
 
 #PLATOS
-    #Devolucion asincrona de datos de alimentos
-    async def get_platos(self,skip,total):
-        return {'platos':self.platos['platos'][skip:(total+skip)]}
+    #Devolucion asincrona de datos de platos
+    async def get_platos(self,skip,total,filtronombre):
+        platos=[]
+        #si existe filtronombre nos quedamos con aquellos que contengan ese filtro
+        if(filtronombre):
+            for item in self.platos['platos'][skip:(total+skip)]:
+                # Comparamos el id que es int
+                if filtronombre in item['nombre']:
+                    platos.append(item)
+        else:
+            platos = self.platos['platos'][skip:(total+skip)]
+        return {'alimentos':platos}
     async def get_allPlatos(self):
         return self.platos
 
