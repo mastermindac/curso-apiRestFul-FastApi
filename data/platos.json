@@ -3,7 +3,7 @@
     {
       "id": 1,
       "nombre": "Macarrones con tomate",
-      "tipo": "Principal",
+      "tipo": "principal",
       "ingredientes": [
         {
           "id": 455,
@@ -40,7 +40,7 @@
     {
       "id": 2,
       "nombre": "Arroz caldoso con pollo",
-      "tipo": "Principal",
+      "tipo": "principal",
       "ingredientes": [
         {
           "id": 60,
@@ -72,7 +72,7 @@
     {
       "id": 3,
       "nombre": "Crema calabacin",
-      "tipo": "Entrante",
+      "tipo": "eEntrante",
       "ingredientes": [
         {
           "id": 153,
@@ -109,7 +109,7 @@
     {
       "id": 4,
       "nombre": "Flan de huevo",
-      "tipo": "Postre",
+      "tipo": "postre",
       "ingredientes": [
         {
           "id": 387,
@@ -130,7 +130,7 @@
     },
     {
       "nombre": "Prueba plato",
-      "tipo": "Principal",
+      "tipo": "bebida",
       "ingredientes": [
         {
           "id": 455,

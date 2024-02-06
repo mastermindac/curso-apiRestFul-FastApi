@@ -9,6 +9,11 @@
       "id": 2,
       "id_plato": 5,
       "tiempo": 15
+    },
+    {
+      "id": 3,
+      "id_plato": 5,
+      "tiempo": 15
     }
   ]
 }

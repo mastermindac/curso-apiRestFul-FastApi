@@ -1,6 +1,15 @@
 #importamos desde fastAPI, la clases FastAPI y Response
 from typing import Union
 from pydantic import BaseModel
+from enum import Enum
+
+
+class TipoPlato(str, Enum):
+    entrante = "entrante"
+    principal = "principal"
+    postre = "postre"
+    bebida = "bebida"
+
 
 # Modelo para la inserción de nuevos ingredientes
 class Ingrediente(BaseModel):
@@ -18,6 +27,6 @@ class IngredientePlato(BaseModel):
     ud: str
 class Plato(BaseModel):
     nombre: str
-    tipo: str
+    tipo: TipoPlato
     ingredientes: list[IngredientePlato]
 
