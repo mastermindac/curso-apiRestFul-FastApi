@@ -1,6 +1,6 @@
 #importamos desde fastAPI, la clases FastAPI y Response
 from typing import Union, Annotated
-from fastapi import FastAPI, Response, status, Body, Query, Path
+from fastapi import FastAPI, Response, status, Body, Query, Path, HTTPException
 from docs import tags_metadata
 from fooddata import FoodData
 from models import Ingrediente, Plato
@@ -47,13 +47,10 @@ async def read_ingredient(ingrediente_id: Annotated[int, Path(ge=0)],
                           response: Response):
     # Buscamos el ingrediente
     ingrediente=await food.get_ingrediente(ingrediente_id)
-    #Si encontramos el ingrediente lo devolvemos
-    if(ingrediente):
-        return ingrediente
-    #Si el ingrediente es nulo
-    else:
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return {"error",str(ingrediente_id)+" no encontrado"}
+    #Si no encontramos el plato devolvemos error
+    if not ingrediente:
+        raise HTTPException(status_code=404, detail="Ingrediente "+str(ingrediente_id)+" no encontrado")
+    return ingrediente
 
 @app.post("/ingredientes",tags=["ingredientes"])
 async def write_ingredients(ingrediente:Ingrediente):
@@ -83,13 +80,10 @@ async def read_platos(total:int,skip:int=0,todos: Union[bool, None] = None):
 async def read_plato(plato_id: int,response: Response):
     # Buscamos el plato
     plato=await food.get_plato(plato_id)
-    #Si encontramos el ingrediente lo devolvemos
-    if(plato):
-        return plato
-    #Si el ingrediente es nulo
-    else:
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return {"error",str(plato_id)+" no encontrado"}
+    #Si no encontramos el plato devolvemos error
+    if not plato:
+        raise HTTPException(status_code=404, detail="Plato "+str(plato_id)+" no encontrado")
+    return ingrediente
 
 @app.get("/platos/{plato_id}/ingredientes/{ingrediente_id}",tags=["platos"], status_code=status.HTTP_200_OK)
 async def read_platoIngrediente(plato_id: int,ingrediente_id: int,response: Response):
