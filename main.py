@@ -1,9 +1,13 @@
 #importamos desde fastAPI, la clases FastAPI y Response
+import json
 from typing import Union, Annotated
 from fastapi import FastAPI, Response, status, Body, Query, Path, HTTPException
+from starlette.exceptions import HTTPException as StarletteHTTPException
+from fastapi.exceptions import RequestValidationError
 from docs import tags_metadata
 from fooddata import FoodData
 from models import Ingrediente, Plato
+from fastapi.responses import JSONResponse
 
 # Objeto para trabajar con los datos de prueba
 food = FoodData()
@@ -24,6 +28,30 @@ app = FastAPI(
     openapi_tags=tags_metadata
 )
 
+#Las excecpciones de Errores modificadas
+@app.exception_handler(StarletteHTTPException)
+async def http_exception_handler(request, exc):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"error":exc.detail},
+    )
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request, exc):
+    #Conversion dict
+    errorDict=eval(str(exc))
+    #MAnejamos diferentes códigos
+    if(errorDict[0]['type']=='greater_than_equal'):
+        codigoError=422
+    else:
+        codigoError = 404
+    return JSONResponse(
+        status_code=codigoError,
+        content={
+            "error":errorDict[0]['msg'],
+            "datoEnviado":errorDict[0]['input']
+        },
+    )
 #Definición de los ENDPOINTS
 
 #DEFAULT
