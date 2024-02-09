@@ -1,3 +1,4 @@
+import uvicorn
 #importamos desde fastAPI, la clases FastAPI y Response
 import json
 from typing import Union, Annotated
@@ -129,4 +130,6 @@ async def read_platoIngrediente(plato_id: int,ingrediente_id: int,response: Resp
 async def write_platos(plato:Plato, tiempodestacado: Annotated[int, Body()]):
     return await food.write_plato(plato,tiempodestacado)
 
-
+#DEBUGING
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
