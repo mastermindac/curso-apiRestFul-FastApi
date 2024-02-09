@@ -1,6 +1,7 @@
 import json
+import bcrypt
 from typing import Union
-from models import Ingrediente, Plato
+from models import Ingrediente, Plato, Usuario
 # Clase que nos permite trabajar con los datos de prueba
 class FoodData:
 
@@ -8,9 +9,11 @@ class FoodData:
     alimentos=[]
     platos=[]
     destacados = []
+    usuarios = []
     fileAlimentos = None
     filePlatos = None
     fileDestacados = None
+    fileUsuarios = None
 
     def __init__(self):
         #Carga de los ficheros de datos de prueba
@@ -23,6 +26,9 @@ class FoodData:
         self.fileDestacados=open('data/destacados.json')
         self.destacados = json.load(self.fileDestacados)
         self.fileDestacados.close()
+        self.fileUsuarios=open('data/usuarios.json')
+        self.usuarios = json.load(self.fileUsuarios)
+        self.fileUsuarios.close()
 
 #INGREDIENTES
     #Devolucion asincrona de datos de alimentos
@@ -197,3 +203,20 @@ class FoodData:
         json.dump(self.destacados,self.fileDestacados,indent=2)
         self.fileDestacados.close()
         return destacadoDict
+
+    # USUARIOS
+    # Recibimos y guardamos un nuevo usuario
+    async def write_usuario(self, usuario: Usuario):
+        self.fileUsuarios=open('data/usuarios.json','w')
+        #Conseguimos el último id de la lista
+        ultimo_usuario=self.usuarios['usuarios'][-1]['id']
+        #Añadimos un nuevo id
+        usuarioDict=usuario.model_dump()
+        usuarioDict['id']=ultimo_usuario+1
+        # Hash del password
+        salt = bcrypt.gensalt()
+        usuarioDict['password'] = bcrypt.hashpw(usuarioDict['password'].encode('utf-8'), salt).decode("utf-8")
+        self.usuarios['usuarios'].append(usuarioDict)
+        json.dump(self.usuarios,self.fileUsuarios,indent=2)
+        self.fileUsuarios.close()
+        return usuarioDict

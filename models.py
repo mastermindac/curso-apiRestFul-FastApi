@@ -30,3 +30,14 @@ class Plato(BaseModel):
     tipo: TipoPlato
     ingredientes: list[IngredientePlato]
 
+# Modelo de Usuarios
+class Usuario(BaseModel):
+    nombre: str
+    apellidos: str
+    email: str
+    password: str
+
+class UsuarioOut(BaseModel):
+    nombre: str
+    apellidos: str
+    email: str

@@ -1,0 +1,42 @@
+{
+  "usuarios": [
+    {
+      "id": 1
+    },
+    {
+      "nombre": "Paco",
+      "apellidos": "Gomez Arnal",
+      "email": "paco@mastermind.es",
+      "password": "$2b$12$cDezDiUw6fpry6f.oxbxVehN8q7JQ0H0aBpcOLF4.9gfXLRN3u2oO",
+      "id": 2
+    },
+    {
+      "nombre": "Paco",
+      "apellidos": "Gomez Arnal",
+      "email": "paco@mastermind.es",
+      "password": "$2b$12$Y/VkG9cmsMPQ/437aByi9.9caJYcxZmQHSpnNcoRGfCcNludyamfi",
+      "id": 3
+    },
+    {
+      "nombre": "Paco",
+      "apellidos": "Gomez Arnal",
+      "email": "paco@mastermind.es",
+      "password": "$2b$12$f4yW.oob/EYykWAklRTSnOx2tMi2CRpKkeM7b9A0pNz7oiBa1WtwW",
+      "id": 4
+    },
+    {
+      "nombre": "Paco",
+      "apellidos": "Gomez Arnal",
+      "email": "paco@mastermind.es",
+      "password": "$2b$12$c7dfOcQHEGDyTZMe3ayPJ.9p3ei/HBP.1cIH4QE.zk.6C6/rFfLuy",
+      "id": 5
+    },
+    {
+      "nombre": "Paco",
+      "apellidos": "Gomez Arnal",
+      "email": "paco@mastermind.es",
+      "password": "$2b$12$8Wni/AegOumXV5DxjM5UPu99hP.dlp41nmwqwS/43B1YsA3hg/6b.",
+      "id": 6
+    }
+  ]
+}

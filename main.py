@@ -1,13 +1,13 @@
 import uvicorn
 #importamos desde fastAPI, la clases FastAPI y Response
 import json
-from typing import Union, Annotated
+from typing import Any,Union, Annotated
 from fastapi import FastAPI, Response, status, Body, Query, Path, HTTPException
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi.exceptions import RequestValidationError
 from docs import tags_metadata
 from fooddata import FoodData
-from models import Ingrediente, Plato
+from models import Ingrediente, Plato, Usuario, UsuarioOut
 from fastapi.responses import JSONResponse
 
 # Objeto para trabajar con los datos de prueba
@@ -129,6 +129,11 @@ async def read_platoIngrediente(plato_id: int,ingrediente_id: int,response: Resp
 @app.post("/platos",tags=["platos"])
 async def write_platos(plato:Plato, tiempodestacado: Annotated[int, Body()]):
     return await food.write_plato(plato,tiempodestacado)
+
+#USUARIOS
+@app.post("/usuarios",tags=["usuarios"], response_model=UsuarioOut)
+async def write_usuario(usuario:Usuario) -> Any:
+    return await food.write_usuario(usuario)
 
 #DEBUGING
 if __name__ == "__main__":
