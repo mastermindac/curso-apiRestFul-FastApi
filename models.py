@@ -1,6 +1,6 @@
 #importamos desde fastAPI, la clases FastAPI y Response
 from typing import Union
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from enum import Enum
 
 
@@ -14,7 +14,7 @@ class TipoPlato(str, Enum):
 # Modelo para la inserción de nuevos ingredientes
 class Ingrediente(BaseModel):
     nombre: str
-    calorias: Union[int, None] = None
+    calorias: Union[int, None] = Field(default=None, gt=0, description="Calorías del ingrediente. Entero mayor que 0")
     carbohidratos: Union[float, None] = None
     proteinas: Union[float, None] = None
     grasas: Union[float, None] = None
@@ -26,7 +26,7 @@ class IngredientePlato(BaseModel):
     cant: int
     ud: str
 class Plato(BaseModel):
-    nombre: str
+    nombre:  str = Field(description="Nombre del plato", max_length=128)
     tipo: TipoPlato
     ingredientes: list[IngredientePlato]
 

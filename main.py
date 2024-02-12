@@ -62,17 +62,25 @@ def read_root():
 
 #INGREDIENTES
 @app.get("/ingredientes",tags=["ingredientes"])
-async def read_ingredients(total:int,skip:int=0,todos: Union[bool, None] = None,
+async def read_ingredients(total: Annotated[int,
+                                            Query(description="Total de ingredientes a devolver")],
+                           skip:int=0,todos: Union[bool, None] = None,
                            filtronombre: Annotated[Union[str, None],
-                                         Query(min_length=3, max_length=10)] = None):
+                                         Query(
+                                             description="Filtro de busqueda",
+                                             min_length=3,
+                                             max_length=10)] = None):
 
     #await pedir datos
     if(todos):
         return await food.get_allIngredientes()
     else:
         return await food.get_ingredientes(skip, total,filtronombre)
-@app.get("/ingredientes/{ingrediente_id}",tags=["ingredientes"], status_code=status.HTTP_200_OK)
-async def read_ingredient(ingrediente_id: Annotated[int, Path(ge=0)],
+@app.get("/ingredientes/{ingrediente_id}",tags=["ingredientes"], status_code=status.HTTP_200_OK,
+         summary="Buscar Ingrediente",
+         description="Buscar Ingrediente a través del ingrtediente_id"
+         )
+async def read_ingredient(ingrediente_id: Annotated[int, Path(description="Id entero de busqueda",ge=0)],
                           response: Response):
     # Buscamos el ingrediente
     ingrediente=await food.get_ingrediente(ingrediente_id)
