@@ -37,6 +37,13 @@
       "email": "paco@mastermind.es",
       "password": "$2b$12$8Wni/AegOumXV5DxjM5UPu99hP.dlp41nmwqwS/43B1YsA3hg/6b.",
       "id": 6
+    },
+    {
+      "nombre": "Francisco",
+      "apellidos": "Gomez Arnal",
+      "email": "paco@paco.es",
+      "password": "$2b$12$Cf4hbCSXRkAcPevm9V2yt..Z2Q9nDBpwdvkwOMFdpnqJuMk5KJIu6",
+      "id": 7
     }
   ]
 }

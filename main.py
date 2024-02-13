@@ -2,7 +2,7 @@ import uvicorn
 #importamos desde fastAPI, la clases FastAPI y Response
 import json
 from typing import Any,Union, Annotated
-from fastapi import FastAPI, Response, status, Body, Query, Path, HTTPException
+from fastapi import FastAPI, Response, status, Body, Query, Path, HTTPException, BackgroundTasks
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi.exceptions import RequestValidationError
 from docs import tags_metadata
@@ -139,8 +139,14 @@ async def write_platos(plato:Plato, tiempodestacado: Annotated[int, Body()]):
     return await food.write_plato(plato,tiempodestacado)
 
 #USUARIOS
+def enviar_correo_fake(email: str, message=""):
+    with open("log.txt", mode="w") as email_file:
+        content = f"notification for {email}: {message}"
+        email_file.write(content)
 @app.post("/usuarios",tags=["usuarios"], response_model=UsuarioOut)
-async def write_usuario(usuario:Usuario) -> Any:
+async def write_usuario(usuario:Usuario,backgroundTasks: BackgroundTasks) -> Any:
+    #Tarea en BG
+    backgroundTasks.add_task(enviar_correo_fake, "paco@paco.es", message="Nuestro primer correo fake")
     return await food.write_usuario(usuario)
 
 #DEBUGING
