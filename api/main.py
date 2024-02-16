@@ -4,7 +4,7 @@ from typing import Any,Union, Annotated
 from fastapi import FastAPI, Response, status, Body, Query, Path, HTTPException, BackgroundTasks
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi.exceptions import RequestValidationError
-from api import FoodData, platosrutas
+from api import FoodData, platosrutas, ingredientesrutas, usuariosrutas
 from api.docs import tags_metadata
 from api import Ingrediente, Plato, Usuario, UsuarioOut
 from fastapi.responses import JSONResponse
@@ -59,64 +59,29 @@ async def validation_exception_handler(request, exc):
 def read_root():
     return {"Hola": "Pakito"}
 
+
+
+
 #INGREDIENTES
-@app.get("/ingredientes",tags=["ingredientes"])
-async def read_ingredients(total: Annotated[int,
-                                            Query(description="Total de ingredientes a devolver")],
-                           skip:int=0,todos: Union[bool, None] = None,
-                           filtronombre: Annotated[Union[str, None],
-                                         Query(
-                                             description="Filtro de busqueda",
-                                             min_length=3,
-                                             max_length=10)] = None):
-
-    #await pedir datos
-    if(todos):
-        return await food.get_allIngredientes()
-    else:
-        return await food.get_ingredientes(skip, total,filtronombre)
-@app.get("/ingredientes/{ingrediente_id}",tags=["ingredientes"], status_code=status.HTTP_200_OK,
-         summary="Buscar Ingrediente",
-         description="Buscar Ingrediente a través del ingrtediente_id"
-         )
-async def read_ingredient(ingrediente_id: Annotated[int, Path(description="Id entero de busqueda",ge=0)],
-                          response: Response):
-    # Buscamos el ingrediente
-    ingrediente=await food.get_ingrediente(ingrediente_id)
-    #Si no encontramos el plato devolvemos error
-    if not ingrediente:
-        raise HTTPException(status_code=404, detail="Ingrediente "+str(ingrediente_id)+" no encontrado")
-    return ingrediente
-
-@app.post("/ingredientes",tags=["ingredientes"])
-async def write_ingredients(ingrediente:Ingrediente):
-    return await food.write_ingrediente(ingrediente)
-
-@app.put("/ingredientes/{ingrediente_id}",tags=["ingredientes"])
-async def update_ingredients(ingrediente_id:int,ingrediente:Ingrediente):
-    return await food.update_ingrediente(ingrediente_id,ingrediente)
-
-@app.delete("/ingredientes/{ingrediente_id}",tags=["ingredientes"])
-async def delete_ingredients(ingrediente_id:int):
-    return await food.delete_ingrediente(ingrediente_id)
-
-@app.post("/ingredientesplatos",tags=["ingredientes"])
-async def write_ingredientsplatos(ingrediente:Ingrediente,plato:Plato):
-    return await food.write_ingredientePlato(ingrediente,plato)
-
+app.include_router(
+    ingredientesrutas,
+    tags=["ingredientes"],
+    prefix="/ingredientes",
+)
 #PLATOS
-app.include_router(platosrutas)
-
+app.include_router(
+    platosrutas,
+    tags=["platos"],
+    prefix="/platos",
+)
 #USUARIOS
-def enviar_correo_fake(email: str, message=""):
-    with open("../log.txt", mode="w") as email_file:
-        content = f"notification for {email}: {message}"
-        email_file.write(content)
-@app.post("/usuarios",tags=["usuarios"], response_model=UsuarioOut)
-async def write_usuario(usuario:Usuario,backgroundTasks: BackgroundTasks) -> Any:
-    #Tarea en BG
-    backgroundTasks.add_task(enviar_correo_fake, "paco@paco.es", message="Nuestro primer correo fake")
-    return await food.write_usuario(usuario)
+app.include_router(
+    usuariosrutas,
+    tags=["usuarios"],
+    prefix="/usuarios",
+)
+
+
 
 #DEBUGING
 if __name__ == "__main__":

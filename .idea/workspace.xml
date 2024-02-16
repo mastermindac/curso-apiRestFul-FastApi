@@ -6,15 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9679264e-89b3-4b7f-98cf-76d389c482ee" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/alimentos.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/data/alimentos.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/destacados.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/data/destacados.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/platos.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/data/platos.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/usuarios.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/data/usuarios.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/usuarios_bakup.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/data/usuarios_bakup.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/docs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fooddata.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/data/fooddata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/utilidades/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/rutas/platos.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/rutas/platos.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,18 +43,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;Python.archivo02.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;5e650e23&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Mastermind/ApiRestFul/FoodApi/libreriaejemplo/subpaquete&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Python.archivo02.executor": "Run",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "8d54c97e",
+    "last_opened_file_path": "C:/Mastermind/ApiRestFul/FoodApi/libreriaejemplo/subpaquete",
+    "settings.editor.selected.configurable": "advanced.settings"
   }
-}</component>
+}]]></component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
       <console-settings module-name="FoodApi" is-module-sdk="true">
@@ -139,11 +133,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/api/main.py</url>
-          <line>83</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/libreriaejemplo/archivo02.py</url>
           <option name="timeStamp" value="5" />
