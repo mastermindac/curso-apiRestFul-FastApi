@@ -1,13 +1,12 @@
 import uvicorn
 #importamos desde fastAPI, la clases FastAPI y Response
-import json
 from typing import Any,Union, Annotated
 from fastapi import FastAPI, Response, status, Body, Query, Path, HTTPException, BackgroundTasks
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi.exceptions import RequestValidationError
-from docs import tags_metadata
-from fooddata import FoodData
-from models import Ingrediente, Plato, Usuario, UsuarioOut
+from api import FoodData, platosrutas
+from api.docs import tags_metadata
+from api import Ingrediente, Plato, Usuario, UsuarioOut
 from fastapi.responses import JSONResponse
 
 # Objeto para trabajar con los datos de prueba
@@ -106,41 +105,11 @@ async def write_ingredientsplatos(ingrediente:Ingrediente,plato:Plato):
     return await food.write_ingredientePlato(ingrediente,plato)
 
 #PLATOS
-@app.get("/platos",tags=["platos"])
-async def read_platos(total:int,skip:int=0,todos: Union[bool, None] = None):
-    #await pedir datos
-    if(todos):
-        return await food.get_allPlatos()
-    else:
-        return await food.get_platos(skip, total)
-@app.get("/platos/{plato_id}",tags=["platos"], status_code=status.HTTP_200_OK)
-async def read_plato(plato_id: int,response: Response):
-    # Buscamos el plato
-    plato=await food.get_plato(plato_id)
-    #Si no encontramos el plato devolvemos error
-    if not plato:
-        raise HTTPException(status_code=404, detail="Plato "+str(plato_id)+" no encontrado")
-    return ingrediente
-
-@app.get("/platos/{plato_id}/ingredientes/{ingrediente_id}",tags=["platos"], status_code=status.HTTP_200_OK)
-async def read_platoIngrediente(plato_id: int,ingrediente_id: int,response: Response):
-    # Buscamos el plato
-    ingrediente=await food.get_ingredientePlato(plato_id,ingrediente_id)
-    #Si encontramos el ingrediente lo devolvemos
-    if(ingrediente):
-        return ingrediente
-    #Si el ingrediente es nulo
-    else:
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return {"error","plato "+str(plato_id)+","+"ingrediente "+str(ingrediente_id)+" no encontrado"}
-
-@app.post("/platos",tags=["platos"])
-async def write_platos(plato:Plato, tiempodestacado: Annotated[int, Body()]):
-    return await food.write_plato(plato,tiempodestacado)
+app.include_router(platosrutas)
 
 #USUARIOS
 def enviar_correo_fake(email: str, message=""):
-    with open("log.txt", mode="w") as email_file:
+    with open("../log.txt", mode="w") as email_file:
         content = f"notification for {email}: {message}"
         email_file.write(content)
 @app.post("/usuarios",tags=["usuarios"], response_model=UsuarioOut)

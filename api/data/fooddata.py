@@ -1,7 +1,7 @@
 import json
 import bcrypt
-from typing import Union
-from models import Ingrediente, Plato, Usuario
+import os
+from api.utilidades.models import Ingrediente, Plato, Usuario
 # Clase que nos permite trabajar con los datos de prueba
 class FoodData:
 
@@ -14,19 +14,22 @@ class FoodData:
     filePlatos = None
     fileDestacados = None
     fileUsuarios = None
+    directorio_trabajo=None
 
     def __init__(self):
+        self.directorio_trabajo = os.getcwd()
+        self.directorio_trabajo=self.directorio_trabajo+"\\api\\data\\"
         #Carga de los ficheros de datos de prueba
-        self.fileAlimentos=open('data/alimentos.json')
+        self.fileAlimentos=open(self.directorio_trabajo+'alimentos.json')
         self.alimentos = json.load(self.fileAlimentos)
         self.fileAlimentos.close()
-        self.filePlatos=open('data/platos.json')
+        self.filePlatos=open(self.directorio_trabajo+'platos.json')
         self.platos = json.load(self.filePlatos)
         self.filePlatos.close()
-        self.fileDestacados=open('data/destacados.json')
+        self.fileDestacados=open(self.directorio_trabajo+'destacados.json')
         self.destacados = json.load(self.fileDestacados)
         self.fileDestacados.close()
-        self.fileUsuarios=open('data/usuarios.json')
+        self.fileUsuarios=open(self.directorio_trabajo+'usuarios.json')
         self.usuarios = json.load(self.fileUsuarios)
         self.fileUsuarios.close()
 
@@ -63,7 +66,7 @@ class FoodData:
 
         # Recibimos y guardamos un nuevo ingrediente
     async def write_ingrediente(self, ingrediente: Ingrediente):
-        self.fileAlimentos=open('data/alimentos.json','w')
+        self.fileAlimentos=open(self.directorio_trabajo+'alimentos.json', 'w')
         #Conseguimos el último id de la lista
         ultimo_alimento=self.alimentos['alimentos'][-1]['id']
         #Añadimos un nuevo id al ingrediente nuevo
@@ -78,7 +81,7 @@ class FoodData:
 
     # Recibimos y actualizamos un nuevo ingrediente
     async def update_ingrediente(self, ingrediente_id: int, ingrediente: Ingrediente):
-        self.fileAlimentos=open('data/alimentos.json','w')
+        self.fileAlimentos=open(self.directorio_trabajo+'alimentos.json', 'w')
         #Buscamos el ingrediente
         ingredienteEncontrado=None
         ingredientePos=0
@@ -105,7 +108,7 @@ class FoodData:
 
     # Borramos un ingrediente
     async def delete_ingrediente(self, ingrediente_id: int):
-        self.fileAlimentos=open('data/alimentos.json','w')
+        self.fileAlimentos=open(self.directorio_trabajo+'alimentos.json', 'w')
         #Buscamos el ingrediente
         ingredienteEncontrado=None
         ingredientePos=0
@@ -175,7 +178,7 @@ class FoodData:
 
     # Recibimos y guardamos un nuevo plato
     async def write_plato(self, plato: Plato,tiempoDestacado: int):
-        self.filePlatos=open('data/platos.json','w')
+        self.filePlatos=open(self.directorio_trabajo+'platos.json', 'w')
         #Conseguimos el último id de la lista
         ultimo_plato=self.platos['platos'][-1]['id']
         #Añadimos un nuevo id al ingrediente nuevo
@@ -191,7 +194,7 @@ class FoodData:
     #DESTACADOS
     # Añadimos un nuevo plato destacado
     async def write_destacado(self, plato: Plato, tiempoDestacado:int):
-        self.fileDestacados=open('data/destacados.json','w')
+        self.fileDestacados=open(self.directorio_trabajo+'destacados.json', 'w')
         #Conseguimos el último id de la lista
         ultimo_destacado=self.destacados['destacados'][-1]['id']
         #Añadimos un nuevo destacado
@@ -207,7 +210,7 @@ class FoodData:
     # USUARIOS
     # Recibimos y guardamos un nuevo usuario
     async def write_usuario(self, usuario: Usuario):
-        self.fileUsuarios=open('data/usuarios.json','w')
+        self.fileUsuarios=open(self.directorio_trabajo+'usuarios.json', 'w')
         #Conseguimos el último id de la lista
         ultimo_usuario=self.usuarios['usuarios'][-1]['id']
         #Añadimos un nuevo id
