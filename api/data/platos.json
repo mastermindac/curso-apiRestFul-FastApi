@@ -144,6 +144,18 @@
         }
       ],
       "id": 5
+    },
+    {
+      "nombre": "Prueba",
+      "tipo": "entrante",
+      "ingredientes": [
+        {
+          "id": 0,
+          "cant": 0,
+          "ud": "string"
+        }
+      ],
+      "id": 6
     }
   ]
 }
